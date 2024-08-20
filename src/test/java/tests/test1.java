@@ -40,6 +40,26 @@ public class test1 {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
         element.click();
 
+        ///////////////TEXT ALMA//////////////////
+
+        WebElement nametext =driver.findElement(By.xpath("//div/p[@id='name']"));
+        String name = nametext.getText();
+        System.out.println(name);
+
+        WebElement emailtext =driver.findElement(By.xpath("//div/p[@id='email']"));
+        String emaill = emailtext.getText();
+        System.out.println(emaill);
+
+        WebElement currentAdresText =driver.findElement(By.xpath("//div/p[@id='currentAddress']"));
+        String currentAdres = currentAdresText.getText();
+        System.out.println(currentAdres);
+
+        WebElement adrestext =driver.findElement(By.xpath("//div/p[@id='permanentAddress']"));
+        String adres =adrestext.getText();
+        System.out.println(adres);
+
+
+
 
     }
 }
