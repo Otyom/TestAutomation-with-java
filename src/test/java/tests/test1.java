@@ -1,9 +1,6 @@
 package tests;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 
@@ -12,9 +9,10 @@ public class test1 {
         System.setProperty("chromeDriver","/drivers/chromedriver.exe");
         WebDriver driver=new ChromeDriver();
 
+
+        /*
         driver.get("https://demoqa.com/text-box");
         driver.manage().window().maximize();
-
 
         WebElement fullname= driver.findElement(By.id("userName"));
         fullname.click();
@@ -56,10 +54,73 @@ public class test1 {
 
         WebElement adrestext =driver.findElement(By.xpath("//div/p[@id='permanentAddress']"));
         String adres =adrestext.getText();
-        System.out.println(adres);
+        System.out.println(adres);    */
 
 
+
+        //CHECKBOX'A TIKLAMA
+        driver.get("https://demoqa.com/checkbox");
+        driver.manage().window().maximize();
+
+        new Actions(driver).scrollByAmount(0,300).perform();
+
+        String homeCheckBoxCssValue="label[for='tree-node-home'] span.rct-checkbox svg";
+        WebElement homeCheckbox = driver.findElement(new By.ByCssSelector(homeCheckBoxCssValue));
+        homeCheckbox.click();
+
+        homeCheckbox=driver.findElement(new By.ByCssSelector(homeCheckBoxCssValue));
+        String homeCheckBoxClassName =homeCheckbox.getAttribute("class");
+
+        if (homeCheckBoxClassName.equals("rct-icon rct-icon-check")){
+            System.out.println("Chechkbox is checked!");
+        }else {
+            System.out.println("Checkbox is unchecked");
+        }
+
+
+        //10 saniye beklemeye alınmıştır.
+        try {
+            Thread.sleep(10L * 1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+        //CHECKBOX NASIL TIKLANILIR.
+
+        driver.get("https://demoqa.com/automation-practice-form");
+        driver.manage().window().maximize();
+        new Actions(driver).scrollByAmount(0,300).perform();
+
+        WebElement sportCheckBox =driver.findElement(By.id("hobbies-checkbox-1"));
+        boolean isEnabled= sportCheckBox.isEnabled();
+        System.out.println(isEnabled);
+
+        WebElement sportCheckboxlabel= driver.findElement(new By.ByCssSelector("label[for='hobbies-checkbox-1']"));
+
+
+        if (isEnabled){
+            try {
+                sportCheckBox.click();
+                System.out.println("sport checkbox tıklanmadı");
+            }catch (ElementClickInterceptedException e){
+                sportCheckboxlabel.click();
+                System.out.println("sport checkbox tıklandı");
+            }
+
+        }
+        boolean isSelected= sportCheckBox.isSelected();
+        System.out.println(isSelected +" olduğu doğrulandı");
+
+
+
+
+
+         }
 
 
     }
-}
+
+
+
+
